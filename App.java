@@ -1,14 +1,25 @@
 import java.util.Scanner;
 public class App{
+	static Scanner in = new Scanner(System.in);
+
+	public static void clearConsole(){
+		for (int i = 0; i < 20; i++) {
+			System.out.println();
+		}
+	}
+
+	public static boolean  playAgain(){
+		System.out.println();
+		System.out.println("Para jogar novamente digite 1 para sair digite 2!");
+		return (in.nextInt() == 1) ?  true:  false;
+	}
 	public static void main(String[] args) {
 		Board board = new Board();
-		Scanner in = new Scanner(System.in);
 		
 		boolean flag = true;
 		System.out.println("Para fazer uma jogada digite uma coordenada de '1 1' à '3 3' no formato linha seguido de coluna");
 		while(flag){
 			char jogador;
-
 			//Alterna jogadores
 			System.out.println("--------------------");
 			if(Board.numOfMoves%2 == 0)
@@ -34,6 +45,7 @@ public class App{
 			}
 			
 			if(x < 0 || x > 2 || y < 0 || y > 2){
+				clearConsole();
 				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 				System.out.println("Para fazer uma jogada digite uma coordenada de '1 1' à '3 3' no formato linha seguido de coluna");
 				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -51,10 +63,21 @@ public class App{
 			//Verifica final da partida somente a partir da quinta jogada.
 			if(Board.numOfMoves > 4){
 				if(board.verifyBoard()){
+					clearConsole();
 					System.out.println("\nJogador " +jogador + " venceu!\n");
 					board.showBoard();
-					flag = false;
-				}	
+					board = new Board();
+					flag = playAgain();
+					in.nextLine();//limpar buffer
+				}
+				if(Board.numOfMoves >= 9){
+					clearConsole();
+					System.out.println("Deu velha!");
+					board = new Board();
+					flag = playAgain();
+					in.nextLine();//limpar buffer
+				}
+
 			}
 		}
 		in.close();
