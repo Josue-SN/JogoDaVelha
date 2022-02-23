@@ -48,7 +48,7 @@ public class App{
 				continue;
 			}
 			
-			//Verifica final da partida somente se houve mais de 4 jogadas.
+			//Verifica final da partida somente a partir da quinta jogada.
 			if(Board.numOfMoves > 4){
 				if(board.verifyBoard()){
 					System.out.println("\nJogador " +jogador + " venceu!\n");

@@ -22,7 +22,7 @@ public class Board{
 
 		//Verifica as colunas
 		for (int i = 0; i < board.length; i++) {
-			if(board[0][i] == board[1][i] && board[i][1] == board[2][i] && board[2][i] != '-'){
+			if(board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[2][i] != '-'){
 				return true;
 			}
 		}
